@@ -77,7 +77,10 @@ $firefoxManifest = [ordered]@{
   browser_specific_settings = [ordered]@{
     gecko = [ordered]@{
       id = "focustube@kitiketov"
-      strict_min_version = "109.0"
+      data_collection_permissions = [ordered]@{
+        required = @("none")
+      }
+      strict_min_version = "142.0"
     }
   }
 }
@@ -86,7 +89,24 @@ $firefoxManifest |
   ConvertTo-Json -Depth 10 |
   Set-Content -LiteralPath (Join-Path $stagingDir "manifest.json") -Encoding UTF8
 
-Compress-Archive -Path (Join-Path $stagingDir "*") -DestinationPath $zipPath -CompressionLevel Optimal
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+$zip = [System.IO.Compression.ZipFile]::Open($zipPath, [System.IO.Compression.ZipArchiveMode]::Create)
+try {
+  Get-ChildItem -LiteralPath $stagingDir -Recurse -File | ForEach-Object {
+    $fileFullPath = [System.IO.Path]::GetFullPath($_.FullName)
+    $relativePath = $fileFullPath.Substring($stagingFullPath.Length).TrimStart("\", "/").Replace("\", "/")
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
+      $zip,
+      $_.FullName,
+      $relativePath,
+      [System.IO.Compression.CompressionLevel]::Optimal
+    ) | Out-Null
+  }
+} finally {
+  $zip.Dispose()
+}
 
 Remove-Item -LiteralPath $stagingDir -Recurse -Force
 if ((Test-Path -LiteralPath $stagingRoot) -and -not (Get-ChildItem -LiteralPath $stagingRoot -Force)) {

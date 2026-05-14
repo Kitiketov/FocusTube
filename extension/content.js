@@ -101,21 +101,17 @@
     "[role='link']",
     "[role='button']"
   ].join(",");
-  const WATCH_VISIBLE_ICON = [
-    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
-    '<path d="M2.75 12s3.25-6.5 9.25-6.5 9.25 6.5 9.25 6.5-3.25 6.5-9.25 6.5S2.75 12 2.75 12Z"/>',
-    '<circle cx="12" cy="12" r="2.75"/>',
-    "</svg>"
-  ].join("");
-  const WATCH_HIDDEN_ICON = [
-    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
-    '<path d="M3.25 3.25 20.75 20.75"/>',
-    '<path d="M9.55 5.35A9.7 9.7 0 0 1 12 5c6 0 9.25 7 9.25 7a13.42 13.42 0 0 1-2.32 3.42"/>',
-    '<path d="M6.28 6.95A13.74 13.74 0 0 0 2.75 12s3.25 6.5 9.25 6.5c1.43 0 2.73-.36 3.88-.92"/>',
-    '<path d="M10.18 10.18a2.75 2.75 0 0 0 3.64 3.64"/>',
-    '<path d="M13.35 9.35a2.75 2.75 0 0 1 1.3 1.3"/>',
-    "</svg>"
-  ].join("");
+  const WATCH_VISIBLE_ICON_PARTS = [
+    { tag: "path", attributes: { d: "M2.75 12s3.25-6.5 9.25-6.5 9.25 6.5 9.25 6.5-3.25 6.5-9.25 6.5S2.75 12 2.75 12Z" } },
+    { tag: "circle", attributes: { cx: "12", cy: "12", r: "2.75" } }
+  ];
+  const WATCH_HIDDEN_ICON_PARTS = [
+    { tag: "path", attributes: { d: "M3.25 3.25 20.75 20.75" } },
+    { tag: "path", attributes: { d: "M9.55 5.35A9.7 9.7 0 0 1 12 5c6 0 9.25 7 9.25 7a13.42 13.42 0 0 1-2.32 3.42" } },
+    { tag: "path", attributes: { d: "M6.28 6.95A13.74 13.74 0 0 0 2.75 12s3.25 6.5 9.25 6.5c1.43 0 2.73-.36 3.88-.92" } },
+    { tag: "path", attributes: { d: "M10.18 10.18a2.75 2.75 0 0 0 3.64 3.64" } },
+    { tag: "path", attributes: { d: "M13.35 9.35a2.75 2.75 0 0 1 1.3 1.3" } }
+  ];
 
   let applyTimer = 0;
   let shortsUsageTimer = 0;
@@ -412,7 +408,6 @@
   function updateWatchToggle(button) {
     const state = watchRecommendationsRevealed ? "revealed" : "blurred";
     const label = watchRecommendationsRevealed ? t("recommendationsVisible") : t("recommendationsHidden");
-    const icon = watchRecommendationsRevealed ? WATCH_VISIBLE_ICON : WATCH_HIDDEN_ICON;
 
     button.classList.toggle("ytsho-watch-toggle-revealed", watchRecommendationsRevealed);
     button.title = watchRecommendationsRevealed ? t("hideRecommendations") : t("showRecommendations");
@@ -422,8 +417,37 @@
     const renderedState = `${settings.language}:${state}`;
     if (button.dataset.state !== renderedState) {
       button.dataset.state = renderedState;
-      button.innerHTML = `<span class="ytsho-watch-toggle-icon">${icon}</span><span class="ytsho-watch-toggle-label">${label}</span>`;
+      button.replaceChildren(createWatchIcon(watchRecommendationsRevealed), createWatchLabel(label));
     }
+  }
+
+  function createWatchIcon(revealed) {
+    const icon = document.createElement("span");
+    icon.className = "ytsho-watch-toggle-icon";
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+
+    const parts = revealed ? WATCH_VISIBLE_ICON_PARTS : WATCH_HIDDEN_ICON_PARTS;
+    for (const part of parts) {
+      const element = document.createElementNS("http://www.w3.org/2000/svg", part.tag);
+      for (const [name, value] of Object.entries(part.attributes)) {
+        element.setAttribute(name, value);
+      }
+      svg.append(element);
+    }
+
+    icon.append(svg);
+    return icon;
+  }
+
+  function createWatchLabel(text) {
+    const label = document.createElement("span");
+    label.className = "ytsho-watch-toggle-label";
+    label.textContent = text;
+    return label;
   }
 
   function removeWatchToggle() {
