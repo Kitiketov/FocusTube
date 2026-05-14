@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FocusTube</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header class="header">
+        <img class="app-icon" src="icons/icon-48.png" alt="" />
+        <div>
+          <h1>FocusTube</h1>
+          <p>YouTube для фокуса: поиск, лимиты Shorts и меньше отвлечений.</p>
+          <div class="header-links">
+            <a class="byline" href="https://github.com/Kitiketov" target="_blank" rel="noopener">by kitiketov</a>
+            <a class="feedback-link" href="https://forms.gle/RRq2P8Bh814HoqZ48" target="_blank" rel="noopener">Обратная связь</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" aria-label="Настройки">
+        <label class="setting">
+          <span>
+            <strong>Поиск на главной</strong>
+            <small>Когда выключено, главная YouTube снова показывает обычные рекомендации.</small>
+          </span>
+          <input id="homeSearchOnlyEnabled" type="checkbox" />
+        </label>
+
+        <div class="setting setting-stack">
+          <span>
+            <strong>Shorts</strong>
+            <small>Можно выключить полностью, разрешить или включить дневной лимит.</small>
+          </span>
+          <select id="shortsMode" aria-label="Режим Shorts">
+            <option value="blocked">Отключены</option>
+            <option value="limited">Лимит</option>
+            <option value="allowed">Разрешены</option>
+          </select>
+
+          <div id="shortsLimitControls" class="limit-controls">
+            <label>
+              <span>Время просмотра</span>
+              <select id="shortsDailyLimitMinutes" aria-label="Лимит просмотра Shorts">
+                <option value="5">5 минут</option>
+                <option value="10">10 минут</option>
+                <option value="15">15 минут</option>
+                <option value="30">30 минут</option>
+                <option value="60">60 минут</option>
+              </select>
+            </label>
+
+            <label>
+              <span>После лимита</span>
+              <select id="shortsBlockMode" aria-label="Срок блокировки Shorts">
+                <option value="untilTomorrow">До завтра</option>
+                <option value="hours">На выбранное время</option>
+              </select>
+            </label>
+
+            <label id="shortsBlockHoursRow">
+              <span>Срок</span>
+              <select id="shortsBlockHours" aria-label="Количество часов блокировки Shorts">
+                <option value="1">1 час</option>
+                <option value="3">3 часа</option>
+                <option value="6">6 часов</option>
+                <option value="12">12 часов</option>
+                <option value="24">24 часа</option>
+              </select>
+            </label>
+
+            <p id="shortsLimitStatus" class="setting-status"></p>
+          </div>
+        </div>
+
+        <label class="setting">
+          <span>
+            <strong>Разрешить боковую панель</strong>
+            <small>Кнопка меню сможет открывать полную панель слева.</small>
+          </span>
+          <input id="allowGuideOpen" type="checkbox" />
+        </label>
+
+        <label class="setting">
+          <span>
+            <strong>Блюрить рекомендации при просмотре</strong>
+            <small>Скрывает боковые рекомендации на странице видео. Кнопка с глазом временно показывает их обратно.</small>
+          </span>
+          <input id="blurWatchRecommendations" type="checkbox" />
+        </label>
+      </section>
+
+      <section class="section support" aria-label="Поддержать разработчика">
+        <div>
+          <strong>Поддержать разработчика</strong>
+          <small>Если расширение помогает не залипать в YouTube, можно сказать спасибо.</small>
+        </div>
+        <button
+          id="supportButton"
+          class="support-button"
+          type="button"
+        >
+          Поддержать через ЮMoney
+        </button>
+      </section>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

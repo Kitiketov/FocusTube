@@ -1,0 +1,306 @@
+:root.ytsho-scroll-locked,
+:root.ytsho-scroll-locked body {
+  height: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+:root.ytsho-scroll-locked ytd-app,
+:root.ytsho-scroll-locked ytd-page-manager {
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+:root.ytsho-collapse-guide ytd-app > ytd-guide-renderer,
+:root.ytsho-collapse-guide ytd-app > #guide {
+  display: none !important;
+}
+
+:root.ytsho-collapse-guide:not(.ytsho-guide-open-allowed) tp-yt-app-drawer,
+:root.ytsho-collapse-guide:not(.ytsho-guide-open-allowed) tp-yt-app-drawer[opened] {
+  display: none !important;
+}
+
+:root.ytsho-collapse-guide ytd-mini-guide-renderer {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+:root.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] ytd-page-manager,
+:root.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] #page-manager,
+:root.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] #contentContainer {
+  margin-left: 72px !important;
+}
+
+:root.ytsho-watch-mode ytd-mini-guide-renderer,
+:root.ytsho-watch-mode #mini-guide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+:root.ytsho-watch-mode.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] ytd-page-manager,
+:root.ytsho-watch-mode.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] #page-manager,
+:root.ytsho-watch-mode.ytsho-collapse-guide ytd-app[guide-persistent-and-visible] #contentContainer {
+  margin-left: 0 !important;
+}
+
+:root.ytsho-hide-shorts ytd-guide-entry-renderer:has(a[href="/shorts"]),
+:root.ytsho-hide-shorts ytd-guide-entry-renderer:has(a[href$="/shorts"]),
+:root.ytsho-hide-shorts ytd-guide-entry-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-guide-entry-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-guide-entry-renderer:has(a[href*="/shorts"]),
+:root.ytsho-hide-shorts ytd-mini-guide-entry-renderer:has(a[href="/shorts"]),
+:root.ytsho-hide-shorts ytd-mini-guide-entry-renderer:has(a[href$="/shorts"]),
+:root.ytsho-hide-shorts ytd-mini-guide-entry-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-mini-guide-entry-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-mini-guide-entry-renderer:has(a[href*="/shorts"]),
+:root.ytsho-hide-shorts tp-yt-paper-item:has(a[href="/shorts"]),
+:root.ytsho-hide-shorts tp-yt-paper-item:has(a[href$="/shorts"]),
+:root.ytsho-hide-shorts tp-yt-paper-item:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts tp-yt-paper-item:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts tp-yt-paper-item:has(a[href*="/shorts"]),
+:root.ytsho-hide-shorts yt-chip-cloud-chip-renderer:has(a[href="/shorts"]),
+:root.ytsho-hide-shorts yt-chip-cloud-chip-renderer:has(a[href$="/shorts"]),
+:root.ytsho-hide-shorts yt-chip-cloud-chip-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts yt-chip-cloud-chip-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts yt-chip-cloud-chip-renderer:has(a[href*="/shorts"]),
+:root.ytsho-hide-shorts ytd-rich-section-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-rich-section-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-rich-item-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-video-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-video-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-compact-video-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-compact-video-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts ytd-grid-video-renderer:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts ytd-grid-video-renderer:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts yt-lockup-view-model:has(a[href^="/shorts/"]),
+:root.ytsho-hide-shorts yt-lockup-view-model:has(a[href*="youtube.com/shorts/"]),
+:root.ytsho-hide-shorts a[href="/shorts"],
+:root.ytsho-hide-shorts a[href$="/shorts"],
+:root.ytsho-hide-shorts a[href^="/shorts/"],
+:root.ytsho-hide-shorts a[href*="/shorts"],
+:root.ytsho-hide-shorts a[href*="youtube.com/shorts/"],
+:root.ytsho-hide-shorts a[title="Shorts"],
+:root.ytsho-hide-shorts a[aria-label="Shorts"],
+:root.ytsho-hide-shorts ytd-reel-shelf-renderer,
+:root.ytsho-hide-shorts ytd-reel-item-renderer,
+:root.ytsho-hide-shorts ytm-shorts-lockup-view-model,
+.ytsho-shorts-hidden {
+  display: none !important;
+}
+
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-feed-filter-chip-bar-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-rich-section-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-rich-shelf-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-rich-item-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] ytd-continuation-item-renderer,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] yt-lockup-view-model,
+:root.ytsho-home-mode ytd-browse[page-subtype="home"] #contents,
+:root.ytsho-home-mode ytd-two-column-browse-results-renderer,
+:root.ytsho-home-mode ytd-rich-grid-renderer {
+  display: none !important;
+}
+
+:root.ytsho-home-mode ytd-masthead #center {
+  position: fixed !important;
+  top: 47vh !important;
+  left: calc(50% + 36px) !important;
+  z-index: 2300 !important;
+  width: min(720px, calc(100vw - 220px)) !important;
+  max-width: min(720px, calc(100vw - 220px)) !important;
+  min-width: 260px !important;
+  transform: translate(-50%, -50%) !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+:root.ytsho-home-mode ytd-masthead #search,
+:root.ytsho-home-mode ytd-masthead #search-form,
+:root.ytsho-home-mode ytd-masthead ytd-searchbox {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+:root.ytsho-home-mode ytd-masthead #center #search-icon-legacy,
+:root.ytsho-home-mode ytd-masthead #center button,
+:root.ytsho-home-mode ytd-masthead #center input,
+:root.ytsho-home-mode ytd-masthead #center yt-icon,
+:root.ytsho-home-mode ytd-masthead #center yt-button-shape {
+  pointer-events: auto !important;
+}
+
+#ytsho-home-root {
+  position: fixed;
+  inset: 56px 0 0 72px;
+  z-index: 1999;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 32px;
+  background: var(--yt-spec-base-background, #ffffff);
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  font-family: Roboto, Arial, sans-serif;
+  pointer-events: none;
+}
+
+.ytsho-search-shell {
+  width: min(720px, 92vw);
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  transform: translateY(-15vh);
+}
+
+.ytsho-wordmark {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+:root.ytsho-watch-recommendations-blurred ytd-watch-flexy #secondary > :not(#ytsho-watch-toggle) {
+  filter: blur(14px) saturate(0.55) brightness(0.7);
+  opacity: 0.78;
+  pointer-events: none !important;
+  user-select: none !important;
+  transition: filter 160ms ease, opacity 160ms ease;
+}
+
+#ytsho-watch-toggle {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  width: 100%;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+  margin: 0 0 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  background: var(--yt-spec-base-background, #ffffff);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  font: 500 14px/20px Roboto, Arial, sans-serif;
+  text-align: left;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+#ytsho-watch-toggle:hover {
+  background: var(--yt-spec-badge-chip-background, #f2f2f2);
+  border-color: var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.14));
+}
+
+#ytsho-watch-toggle:focus-visible {
+  outline: 2px solid #065fd4;
+  outline-offset: 2px;
+}
+
+.ytsho-watch-toggle-icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #cc0000;
+  background: rgba(204, 0, 0, 0.1);
+}
+
+.ytsho-watch-toggle-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ytsho-watch-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#ytsho-watch-toggle.ytsho-watch-toggle-revealed {
+  color: #0f0f0f;
+  background: var(--yt-spec-base-background, #ffffff);
+}
+
+#ytsho-watch-toggle.ytsho-watch-toggle-revealed .ytsho-watch-toggle-icon {
+  color: #065fd4;
+  background: rgba(6, 95, 212, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  #ytsho-home-root {
+    background: var(--yt-spec-base-background, #0f0f0f);
+    color: var(--yt-spec-text-primary, #ffffff);
+  }
+
+  #ytsho-watch-toggle {
+    color: var(--yt-spec-text-primary, #f1f1f1);
+    background: var(--yt-spec-base-background, #0f0f0f);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+  }
+
+  #ytsho-watch-toggle:hover {
+    background: var(--yt-spec-badge-chip-background, #272727);
+  }
+
+  .ytsho-watch-toggle-icon {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.14);
+  }
+
+  #ytsho-watch-toggle.ytsho-watch-toggle-revealed {
+    color: var(--yt-spec-text-primary, #f1f1f1);
+    background: var(--yt-spec-base-background, #0f0f0f);
+  }
+
+  #ytsho-watch-toggle.ytsho-watch-toggle-revealed .ytsho-watch-toggle-icon {
+    color: #8ab4f8;
+    background: rgba(138, 180, 248, 0.16);
+  }
+}
+
+@media (max-width: 720px) {
+  #ytsho-home-root {
+    left: 0;
+    padding: 24px;
+  }
+
+  :root.ytsho-home-mode ytd-masthead #center {
+    top: 47vh !important;
+    left: 50% !important;
+    width: min(560px, calc(100vw - 32px)) !important;
+    max-width: min(560px, calc(100vw - 32px)) !important;
+  }
+
+  .ytsho-search-shell {
+    width: min(520px, 94vw);
+    transform: translateY(-15vh);
+  }
+
+  .ytsho-wordmark {
+    font-size: 44px;
+  }
+
+  #ytsho-watch-toggle {
+    position: relative;
+    top: auto;
+  }
+}

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Fixture</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 1800px;
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+      }
+
+      ytd-masthead {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 2100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+        box-sizing: border-box;
+        padding: 0 24px;
+        border-bottom: 1px solid #e5e5e5;
+        background: #ffffff;
+      }
+
+      #account-area {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #175ddc;
+      }
+
+      #center {
+        width: 420px;
+      }
+
+      #search-form {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+      }
+
+      #search-form input {
+        flex: 1;
+      }
+
+      ytd-app {
+        display: block;
+        padding-top: 56px;
+      }
+
+      ytd-guide-renderer {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        width: 240px;
+        padding: 12px;
+        border-right: 1px solid #e5e5e5;
+        background: #ffffff;
+      }
+
+      tp-yt-app-drawer[opened] {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        z-index: 2200;
+        display: block;
+        width: 240px;
+        padding: 12px;
+        border-right: 1px solid #e5e5e5;
+        background: #ffffff;
+      }
+
+      ytd-mini-guide-renderer {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        display: none;
+        width: 72px;
+        border-right: 1px solid #e5e5e5;
+        background: #ffffff;
+      }
+
+      ytd-page-manager {
+        display: block;
+        margin-left: 240px;
+        padding: 24px;
+      }
+
+      ytd-watch-flexy {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 24px;
+      }
+
+      #secondary {
+        display: grid;
+        gap: 12px;
+      }
+
+      ytd-compact-video-renderer {
+        display: block;
+        min-height: 80px;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafd;
+      }
+
+      ytd-feed-filter-chip-bar-renderer {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      yt-chip-cloud-chip-renderer {
+        display: inline-flex;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: #f2f2f2;
+      }
+
+      #contents {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      ytd-rich-item-renderer,
+      ytd-rich-section-renderer {
+        display: block;
+        min-height: 180px;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafd;
+      }
+
+      a {
+        color: #0b57d0;
+      }
+    </style>
+  </head>
+  <body>
+    <ytd-masthead>
+      <button id="guide-button" type="button">Menu</button>
+      <div id="center">
+        <form id="search-form" action="/results">
+          <input name="search_query" aria-label="Search" />
+          <button id="search-icon-legacy" type="submit">Search</button>
+        </form>
+      </div>
+      <div id="account-area" aria-label="Account"></div>
+    </ytd-masthead>
+
+    <ytd-app guide-persistent-and-visible>
+      <tp-yt-app-drawer>
+        <div id="guide-content">
+          <ytd-guide-renderer>
+            <ytd-guide-entry-renderer><a href="/">Home</a></ytd-guide-entry-renderer>
+            <ytd-guide-entry-renderer><a href="/shorts">Shorts</a></ytd-guide-entry-renderer>
+          </ytd-guide-renderer>
+        </div>
+      </tp-yt-app-drawer>
+
+      <ytd-guide-renderer>
+        <ytd-guide-entry-renderer><a href="/">Home</a></ytd-guide-entry-renderer>
+        <ytd-guide-entry-renderer><a href="/shorts">Shorts</a></ytd-guide-entry-renderer>
+        <ytd-guide-entry-renderer><a href="/feed/subscriptions">Subscriptions</a></ytd-guide-entry-renderer>
+      </ytd-guide-renderer>
+
+      <ytd-mini-guide-renderer>
+        <ytd-mini-guide-entry-renderer><a href="/">Home</a></ytd-mini-guide-entry-renderer>
+        <ytd-mini-guide-entry-renderer><a href="/shorts">Shorts</a></ytd-mini-guide-entry-renderer>
+      </ytd-mini-guide-renderer>
+
+      <ytd-page-manager id="page-manager">
+        <ytd-watch-flexy>
+          <div id="primary">
+            <h1>Fixture video</h1>
+          </div>
+          <div id="secondary">
+            <ytd-compact-video-renderer data-kind="side-video">
+              <a href="/watch?v=side001">Side recommendation</a>
+            </ytd-compact-video-renderer>
+          </div>
+        </ytd-watch-flexy>
+
+        <ytd-browse page-subtype="home">
+          <ytd-feed-filter-chip-bar-renderer>
+            <yt-chip-cloud-chip-renderer>All</yt-chip-cloud-chip-renderer>
+            <yt-chip-cloud-chip-renderer><a href="/shorts">Shorts</a></yt-chip-cloud-chip-renderer>
+          </ytd-feed-filter-chip-bar-renderer>
+
+          <ytd-rich-grid-renderer>
+            <div id="contents">
+              <ytd-rich-item-renderer data-kind="video">
+                <a id="thumbnail" href="/watch?v=abc123">Thumbnail</a>
+                <a id="video-title" href="/watch?v=abc123">Recommended video</a>
+              </ytd-rich-item-renderer>
+
+              <ytd-rich-section-renderer data-kind="shorts">
+                <a href="/shorts/short001">Shorts shelf</a>
+              </ytd-rich-section-renderer>
+
+              <yt-lockup-view-model data-kind="new-card">
+                <a href="/watch?v=lockup001">New card</a>
+              </yt-lockup-view-model>
+            </div>
+          </ytd-rich-grid-renderer>
+        </ytd-browse>
+      </ytd-page-manager>
+    </ytd-app>
+    <script>
+      document.getElementById("guide-button").addEventListener("click", () => {
+        const drawer = document.querySelector("tp-yt-app-drawer");
+        if (drawer.hasAttribute("opened")) {
+          drawer.removeAttribute("opened");
+          return;
+        }
+        drawer.setAttribute("opened", "");
+      });
+    </script>
+  </body>
+</html>
