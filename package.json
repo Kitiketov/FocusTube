@@ -6,7 +6,8 @@
     "test": "npm run dom-check",
     "dom-check": "node qa/focustube-dom-check.mjs",
     "real-check": "node qa/focustube-real-check.mjs",
-    "package": "powershell -ExecutionPolicy Bypass -File scripts/package-extension.ps1"
+    "package": "powershell -ExecutionPolicy Bypass -File scripts/package-extension.ps1",
+    "package:firefox": "powershell -ExecutionPolicy Bypass -File scripts/package-firefox.ps1"
   },
   "devDependencies": {
     "playwright": "^1.60.0"

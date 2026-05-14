@@ -26,6 +26,7 @@ Chrome or Microsoft Edge.
 
 ```powershell
 npm run package
+npm run package:firefox
 ```
 
-The ZIP is created in `output/release/`.
+The Chrome/Edge and Firefox ZIPs are created in `output/release/`.
