@@ -485,6 +485,22 @@ async function checkWatchRecommendationBlur() {
   assert.equal(revealedState.recommendationFilter, "none");
 
   await page.close();
+
+  const englishPage = await newFixturePage("https://www.youtube.com/watch?v=abc123", {
+    blurWatchRecommendations: true,
+    language: "eu"
+  });
+  assert.equal(
+    await englishPage.evaluate(() => document.getElementById("ytsho-watch-toggle")?.textContent.trim()),
+    "Recommendations hidden"
+  );
+  await englishPage.click("#ytsho-watch-toggle");
+  await englishPage.waitForTimeout(100);
+  assert.equal(
+    await englishPage.evaluate(() => document.getElementById("ytsho-watch-toggle")?.textContent.trim()),
+    "Recommendations visible"
+  );
+  await englishPage.close();
 }
 
 async function checkShortsRedirect() {
@@ -505,7 +521,8 @@ async function checkPopupSettings() {
       shortsBlockMode: "hours",
       shortsBlockHours: 3,
       allowGuideOpen: true,
-      blurWatchRecommendations: true
+      blurWatchRecommendations: true,
+      language: "ru"
     };
     const now = new Date();
     const localDateKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
@@ -576,6 +593,9 @@ async function checkPopupSettings() {
     limit: document.getElementById("shortsDailyLimitMinutes").value,
     blockMode: document.getElementById("shortsBlockMode").value,
     blockHours: document.getElementById("shortsBlockHours").value,
+    language: document.getElementById("language").value,
+    feedbackText: document.querySelector(".feedback-link")?.textContent.trim(),
+    homeSearchTitle: document.querySelector('[data-i18n="homeSearchTitle"]')?.textContent.trim(),
     controlsHidden: document.getElementById("shortsLimitControls").hidden,
     hoursHidden: document.getElementById("shortsBlockHoursRow").hidden,
     status: document.getElementById("shortsLimitStatus").textContent.trim(),
@@ -589,6 +609,9 @@ async function checkPopupSettings() {
   assert.equal(initialState.limit, "15");
   assert.equal(initialState.blockMode, "hours");
   assert.equal(initialState.blockHours, "3");
+  assert.equal(initialState.language, "ru");
+  assert.equal(initialState.feedbackText, "Обратная связь");
+  assert.equal(initialState.homeSearchTitle, "Поиск на главной");
   assert.equal(initialState.controlsHidden, false);
   assert.equal(initialState.hoursHidden, false);
   assert.match(initialState.status, /Осталось 10 мин\./);
@@ -627,6 +650,21 @@ async function checkPopupSettings() {
   assert.equal(updatedState.blockMode, "untilTomorrow");
   assert.equal(updatedState.hoursHidden, true);
   assert.match(updatedState.status, /Осталось 25 мин\./);
+
+  await page.selectOption("#language", "eu");
+  await page.waitForFunction(() => globalThis.__syncStore.language === "eu");
+  const englishState = await page.evaluate(() => ({
+    language: document.getElementById("language").value,
+    htmlLang: document.documentElement.lang,
+    feedbackText: document.querySelector(".feedback-link")?.textContent.trim(),
+    homeSearchTitle: document.querySelector('[data-i18n="homeSearchTitle"]')?.textContent.trim(),
+    status: document.getElementById("shortsLimitStatus").textContent.trim()
+  }));
+  assert.equal(englishState.language, "eu");
+  assert.equal(englishState.htmlLang, "en");
+  assert.equal(englishState.feedbackText, "Feedback");
+  assert.equal(englishState.homeSearchTitle, "Search-only home");
+  assert.match(englishState.status, /25 min left\./);
 
   await page.close();
 }

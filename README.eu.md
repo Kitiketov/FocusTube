@@ -45,6 +45,7 @@ FocusTube helps you open YouTube for a specific video instead of falling into an
 - Watch-page side recommendation blur.
 - Inline eye button to temporarily reveal blurred recommendations.
 - YouTube sidebar expansion control.
+- Extension interface language switch: RU / EU.
 - Feedback link and developer support button.
 
 ## Download

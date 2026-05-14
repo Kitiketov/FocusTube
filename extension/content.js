@@ -18,7 +18,8 @@
     shortsBlockMode: "untilTomorrow",
     shortsBlockHours: 24,
     allowGuideOpen: false,
-    blurWatchRecommendations: false
+    blurWatchRecommendations: false,
+    language: "ru"
   };
   const SETTINGS_KEYS = [
     "homeSearchOnlyEnabled",
@@ -28,12 +29,30 @@
     "shortsBlockHours",
     "allowGuideOpen",
     "blurWatchRecommendations",
+    "language",
     "blockShorts"
   ];
   const SHORTS_STATE_KEYS = ["shortsUsageDate", "shortsUsedMs", "shortsBlockedUntil"];
   const SHORTS_LIMIT_OPTIONS = new Set([5, 10, 15, 30, 60]);
   const SHORTS_BLOCK_HOUR_OPTIONS = new Set([1, 3, 6, 12, 24]);
   const SHORTS_MODES = new Set(["blocked", "limited", "allowed"]);
+  const LANGUAGES = new Set(["ru", "eu"]);
+  const TEXT = {
+    ru: {
+      homeSearchAria: "Поиск YouTube",
+      recommendationsHidden: "Рекомендации скрыты",
+      recommendationsVisible: "Рекомендации видны",
+      hideRecommendations: "Скрыть боковые рекомендации",
+      showRecommendations: "Показать боковые рекомендации"
+    },
+    eu: {
+      homeSearchAria: "YouTube search",
+      recommendationsHidden: "Recommendations hidden",
+      recommendationsVisible: "Recommendations visible",
+      hideRecommendations: "Hide side recommendations",
+      showRecommendations: "Show side recommendations"
+    }
+  };
   const SCROLL_KEYS = new Set([" ", "ArrowDown", "ArrowUp", "End", "Home", "PageDown", "PageUp"]);
   const GUIDE_BUTTON_SELECTOR = [
     "#guide-button",
@@ -212,7 +231,8 @@
         shortsBlockHours: changes.shortsBlockHours?.newValue ?? settings.shortsBlockHours,
         blockShorts: changes.blockShorts?.newValue,
         allowGuideOpen: changes.allowGuideOpen?.newValue ?? settings.allowGuideOpen,
-        blurWatchRecommendations: changes.blurWatchRecommendations?.newValue ?? settings.blurWatchRecommendations
+        blurWatchRecommendations: changes.blurWatchRecommendations?.newValue ?? settings.blurWatchRecommendations,
+        language: changes.language?.newValue ?? settings.language
       }).settings;
       settingsReady = true;
       refreshShortsState();
@@ -323,12 +343,13 @@
 
     let root = document.getElementById(HOME_ROOT_ID);
     if (root) {
+      root.setAttribute("aria-label", t("homeSearchAria"));
       return;
     }
 
     root = document.createElement("section");
     root.id = HOME_ROOT_ID;
-    root.setAttribute("aria-label", "YouTube search");
+    root.setAttribute("aria-label", t("homeSearchAria"));
 
     const shell = document.createElement("div");
     shell.className = "ytsho-search-shell";
@@ -390,16 +411,17 @@
 
   function updateWatchToggle(button) {
     const state = watchRecommendationsRevealed ? "revealed" : "blurred";
-    const label = watchRecommendationsRevealed ? "Рекомендации видны" : "Рекомендации скрыты";
+    const label = watchRecommendationsRevealed ? t("recommendationsVisible") : t("recommendationsHidden");
     const icon = watchRecommendationsRevealed ? WATCH_VISIBLE_ICON : WATCH_HIDDEN_ICON;
 
     button.classList.toggle("ytsho-watch-toggle-revealed", watchRecommendationsRevealed);
-    button.title = watchRecommendationsRevealed ? "Скрыть боковые рекомендации" : "Показать боковые рекомендации";
+    button.title = watchRecommendationsRevealed ? t("hideRecommendations") : t("showRecommendations");
     button.setAttribute("aria-label", button.title);
     button.setAttribute("aria-pressed", String(!watchRecommendationsRevealed));
 
-    if (button.dataset.state !== state) {
-      button.dataset.state = state;
+    const renderedState = `${settings.language}:${state}`;
+    if (button.dataset.state !== renderedState) {
+      button.dataset.state = renderedState;
       button.innerHTML = `<span class="ytsho-watch-toggle-icon">${icon}</span><span class="ytsho-watch-toggle-label">${label}</span>`;
     }
   }
@@ -678,7 +700,8 @@
         shortsBlockMode: value?.shortsBlockMode === "hours" ? "hours" : DEFAULT_SETTINGS.shortsBlockMode,
         shortsBlockHours: SHORTS_BLOCK_HOUR_OPTIONS.has(shortsBlockHours) ? shortsBlockHours : DEFAULT_SETTINGS.shortsBlockHours,
         allowGuideOpen: value?.allowGuideOpen === true,
-        blurWatchRecommendations: value?.blurWatchRecommendations === true
+        blurWatchRecommendations: value?.blurWatchRecommendations === true,
+        language: LANGUAGES.has(value?.language) ? value.language : DEFAULT_SETTINGS.language
       },
       shouldMigrateBlockShorts
     };
@@ -720,6 +743,11 @@
 
   function getStorageArea() {
     return getSyncStorageArea();
+  }
+
+  function t(key) {
+    const dictionary = TEXT[settings.language] ?? TEXT[DEFAULT_SETTINGS.language];
+    return dictionary[key] ?? TEXT[DEFAULT_SETTINGS.language][key] ?? key;
   }
 
   function chromeRuntimeAvailable() {

@@ -11,7 +11,7 @@ A small static Manifest V3 extension for keeping YouTube focused: search-first h
 - Hides Shorts entry points across YouTube.
 - Redirects direct `/shorts/...` visits back to `/`.
 - Leaves search results, watch pages, and channel pages outside search-only mode.
-- Adds popup settings for toggling the search-only home, Shorts mode, a daily Shorts time limit, sidebar expansion, and watch-page recommendation blur.
+- Adds popup settings for toggling the search-only home, Shorts mode, a daily Shorts time limit, sidebar expansion, interface language, and watch-page recommendation blur.
 - Supports three Shorts modes: always blocked, limited by daily watch time, or allowed.
 - Keeps the watch-page compact guide hidden and adds an inline eye button for temporarily showing blurred side recommendations.
 - Opens the YooMoney support flow directly from the popup button.

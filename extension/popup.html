@@ -12,19 +12,30 @@
         <img class="app-icon" src="icons/icon-48.png" alt="" />
         <div>
           <h1>FocusTube</h1>
-          <p>YouTube для фокуса: поиск, лимиты Shorts и меньше отвлечений.</p>
+          <p data-i18n="tagline">YouTube для фокуса: поиск, лимиты Shorts и меньше отвлечений.</p>
           <div class="header-links">
             <a class="byline" href="https://github.com/Kitiketov" target="_blank" rel="noopener">by kitiketov</a>
-            <a class="feedback-link" href="https://forms.gle/RRq2P8Bh814HoqZ48" target="_blank" rel="noopener">Обратная связь</a>
+            <a class="feedback-link" href="https://forms.gle/RRq2P8Bh814HoqZ48" target="_blank" rel="noopener" data-i18n="feedbackLink">Обратная связь</a>
           </div>
         </div>
       </header>
 
-      <section class="section" aria-label="Настройки">
+      <section class="section" aria-label="Настройки" data-i18n-aria="settingsAria">
         <label class="setting">
           <span>
-            <strong>Поиск на главной</strong>
-            <small>Когда выключено, главная YouTube снова показывает обычные рекомендации.</small>
+            <strong data-i18n="languageTitle">Язык</strong>
+            <small data-i18n="languageHint">Меняет язык интерфейса расширения.</small>
+          </span>
+          <select id="language" aria-label="Язык расширения" data-i18n-aria="languageAria">
+            <option value="ru" data-i18n="languageRu">Русский</option>
+            <option value="eu" data-i18n="languageEu">English (EU)</option>
+          </select>
+        </label>
+
+        <label class="setting">
+          <span>
+            <strong data-i18n="homeSearchTitle">Поиск на главной</strong>
+            <small data-i18n="homeSearchHint">Когда выключено, главная YouTube снова показывает обычные рекомендации.</small>
           </span>
           <input id="homeSearchOnlyEnabled" type="checkbox" />
         </label>
@@ -32,42 +43,42 @@
         <div class="setting setting-stack">
           <span>
             <strong>Shorts</strong>
-            <small>Можно выключить полностью, разрешить или включить дневной лимит.</small>
+            <small data-i18n="shortsHint">Можно выключить полностью, разрешить или включить дневной лимит.</small>
           </span>
-          <select id="shortsMode" aria-label="Режим Shorts">
-            <option value="blocked">Отключены</option>
-            <option value="limited">Лимит</option>
-            <option value="allowed">Разрешены</option>
+          <select id="shortsMode" aria-label="Режим Shorts" data-i18n-aria="shortsModeAria">
+            <option value="blocked" data-i18n="shortsModeBlocked">Отключены</option>
+            <option value="limited" data-i18n="shortsModeLimited">Лимит</option>
+            <option value="allowed" data-i18n="shortsModeAllowed">Разрешены</option>
           </select>
 
           <div id="shortsLimitControls" class="limit-controls">
             <label>
-              <span>Время просмотра</span>
-              <select id="shortsDailyLimitMinutes" aria-label="Лимит просмотра Shorts">
-                <option value="5">5 минут</option>
-                <option value="10">10 минут</option>
-                <option value="15">15 минут</option>
-                <option value="30">30 минут</option>
-                <option value="60">60 минут</option>
+              <span data-i18n="watchTimeLabel">Время просмотра</span>
+              <select id="shortsDailyLimitMinutes" aria-label="Лимит просмотра Shorts" data-i18n-aria="dailyLimitAria">
+                <option value="5" data-i18n="minutes5">5 минут</option>
+                <option value="10" data-i18n="minutes10">10 минут</option>
+                <option value="15" data-i18n="minutes15">15 минут</option>
+                <option value="30" data-i18n="minutes30">30 минут</option>
+                <option value="60" data-i18n="minutes60">60 минут</option>
               </select>
             </label>
 
             <label>
-              <span>После лимита</span>
-              <select id="shortsBlockMode" aria-label="Срок блокировки Shorts">
-                <option value="untilTomorrow">До завтра</option>
-                <option value="hours">На выбранное время</option>
+              <span data-i18n="afterLimitLabel">После лимита</span>
+              <select id="shortsBlockMode" aria-label="Срок блокировки Shorts" data-i18n-aria="blockModeAria">
+                <option value="untilTomorrow" data-i18n="untilTomorrow">До завтра</option>
+                <option value="hours" data-i18n="selectedTime">На выбранное время</option>
               </select>
             </label>
 
             <label id="shortsBlockHoursRow">
-              <span>Срок</span>
-              <select id="shortsBlockHours" aria-label="Количество часов блокировки Shorts">
-                <option value="1">1 час</option>
-                <option value="3">3 часа</option>
-                <option value="6">6 часов</option>
-                <option value="12">12 часов</option>
-                <option value="24">24 часа</option>
+              <span data-i18n="blockTermLabel">Срок</span>
+              <select id="shortsBlockHours" aria-label="Количество часов блокировки Shorts" data-i18n-aria="blockHoursAria">
+                <option value="1" data-i18n="hour1">1 час</option>
+                <option value="3" data-i18n="hour3">3 часа</option>
+                <option value="6" data-i18n="hour6">6 часов</option>
+                <option value="12" data-i18n="hour12">12 часов</option>
+                <option value="24" data-i18n="hour24">24 часа</option>
               </select>
             </label>
 
@@ -77,30 +88,31 @@
 
         <label class="setting">
           <span>
-            <strong>Разрешить боковую панель</strong>
-            <small>Кнопка меню сможет открывать полную панель слева.</small>
+            <strong data-i18n="sidebarTitle">Разрешить боковую панель</strong>
+            <small data-i18n="sidebarHint">Кнопка меню сможет открывать полную панель слева.</small>
           </span>
           <input id="allowGuideOpen" type="checkbox" />
         </label>
 
         <label class="setting">
           <span>
-            <strong>Блюрить рекомендации при просмотре</strong>
-            <small>Скрывает боковые рекомендации на странице видео. Кнопка с глазом временно показывает их обратно.</small>
+            <strong data-i18n="blurTitle">Блюрить рекомендации при просмотре</strong>
+            <small data-i18n="blurHint">Скрывает боковые рекомендации на странице видео. Кнопка с глазом временно показывает их обратно.</small>
           </span>
           <input id="blurWatchRecommendations" type="checkbox" />
         </label>
       </section>
 
-      <section class="section support" aria-label="Поддержать разработчика">
+      <section class="section support" aria-label="Поддержать разработчика" data-i18n-aria="supportAria">
         <div>
-          <strong>Поддержать разработчика</strong>
-          <small>Если расширение помогает не залипать в YouTube, можно сказать спасибо.</small>
+          <strong data-i18n="supportTitle">Поддержать разработчика</strong>
+          <small data-i18n="supportHint">Если расширение помогает не залипать в YouTube, можно сказать спасибо.</small>
         </div>
         <button
           id="supportButton"
           class="support-button"
           type="button"
+          data-i18n="supportButton"
         >
           Поддержать через ЮMoney
         </button>
