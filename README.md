@@ -71,7 +71,7 @@ https://github.com/Kitiketov/FocusTube/releases/tag/v0.2.2
 6. Выбери распакованную папку расширения.
 
 ### Firefox
-
+https://addons.mozilla.org/ru/firefox/addon/kitiketov-focustube/
 1. Скачай `focustube-firefox-0.2.2.zip`.
 2. Распакуй архив.
 3. Открой `about:debugging#/runtime/this-firefox`.
